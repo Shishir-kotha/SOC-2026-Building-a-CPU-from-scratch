@@ -1,0 +1,50 @@
+// Week 2 — Register File (4 x 8-bit)
+// regs[0]=A, regs[1]=B, regs[2]=C, regs[3]=D
+// Reads: asynchronous | Write: synchronous, gated by we
+// Run: iverilog -o sim ../testbenches/tb_regfile.v regfile.v && vvp sim
+
+module regfile(
+    input        clk, we,
+    input  [1:0] raddr0, raddr1, waddr,
+    input  [7:0] wdata,
+    output [7:0] rdata0, rdata1
+);
+     reg [7:0] reg_A = 8'h00;
+    reg [7:0] reg_B = 8'h00;
+    reg [7:0] reg_C = 8'h00;
+    reg [7:0] reg_D = 8'h00;
+
+    always @(posedge clk) begin
+        // YOUR CODE HERE — write wdata to regs[waddr]
+if (we) begin
+            case (waddr)
+                2'b00: reg_A <= wdata;
+                2'b01: reg_B <= wdata;
+                2'b10: reg_C <= wdata;
+                2'b11: reg_D <= wdata;
+            endcase
+        end
+    end
+
+    // YOUR CODE HERE — assign rdata0 and rdata1 from regs\
+    // assign rdata0 = ...
+    // assign rdata1 = ...
+always @(*) begin
+               case (raddr0)
+            2'b00:   rdata0 = reg_A;
+            2'b01:   rdata0 = reg_B;
+            2'b10:   rdata0 = reg_C;
+            2'b11:   rdata0 = reg_D;
+            default: rdata0 = 8'h00;
+        endcase
+
+        case (raddr1)
+            2'b00:   rdata1 = reg_A;
+            2'b01:   rdata1 = reg_B;
+            2'b10:   rdata1 = reg_C;
+            2'b11:   rdata1 = reg_D;
+            default: rdata1 = 8'h00;
+        endcase
+    end
+
+endmodule
