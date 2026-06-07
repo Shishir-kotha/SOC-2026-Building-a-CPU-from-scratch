@@ -45,7 +45,9 @@ module top_module(
     // assign walk_right = (state == ...);
 
 endmodule
-
+//Total States: 2
+//left (bit 0): Lemming walks left
+//right (bit 1): Lemming walks right
 
 
 // lemmings 2
@@ -116,6 +118,13 @@ module top_module(
      
     // assign walk_right = (state == ...);
 endmodule
+//Total States: 4
+//left (bit 0): Lemming is on ground, moving left
+//right (bit 1): Lemming is on ground, moving right
+//fall_left (bit 2): No ground beneath, was facing left, aaah=1
+//fall_right (bit 3): No ground beneath, was facing right, aaah=1
+
+
 
 // lemmings 3
 
@@ -185,6 +194,14 @@ module top_module(
                 
 
 endmodule
+//Total States: 6
+//left (bit 0): Lemming is on ground, moving left
+//right (bit 1): Lemming is on ground, moving right
+//fall_left (bit 2): No ground beneath, was facing left, aaah=1
+//fall_right (bit 3): No ground beneath, was facing right, aaah=1
+//dig_left (bit 4): Digging downward through ground, was facing left
+//dig_right (bit 5): Digging downward through ground, was facing right
+
 
 
 // lemmings 4
@@ -289,5 +306,13 @@ module top_module(
     assign digging    = state[DIG_LEFT]  | state[DIG_RIGHT];
 
 endmodule
+//Total States: 7
+//LEFT (bit 0): Lemming is on ground, moving left
+//RIGHT (bit 1): Lemming is on ground, moving right
+//FALL_LEFT (bit 2): No ground beneath, was facing left, aaah=1
+//FALL_RIGHT (bit 3): No ground beneath, was facing right, aaah=1
+//DIG_LEFT (bit 4): Digging downward through ground, was facing left
+//DIG_RIGHT (bit 5): Digging downward through ground, was facing right
+//SPLATTER (bit 6): Fell more than 20 cycles and hit ground, all outputs permanently 0
 
 
